@@ -16,7 +16,7 @@ function getBookList() {
                     <td>${item.bookname}</td>
                     <td>${item.author}</td>
                     <td>${item.publisher}</td>
-                    <td class='delAndEdit'>
+                    <td class='delAndEdit' data-id=${item.id}>
                         <span class="del">删除</span>
                         <span class="edit">编辑</span>
                     </td>
@@ -49,4 +49,19 @@ document.querySelector('.saveBtn').addEventListener('click', () => {
         addModal.hide()
     })
 
+})
+
+document.querySelector('.list').addEventListener('click', e => {
+    // console.log(e.target)
+    if (e.target.classList.contains('del')){
+        // console.log('点击删除元素')
+        theId = e.target.parentNode.dataset.id
+        
+        axios({
+            url: `https://hmajax.itheima.net/api/books/${theId}`,
+            method: 'delete'
+        }).then(() => {
+            getBookList()
+        })
+    }
 })
