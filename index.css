@@ -85,3 +85,11 @@ td{
     width: 100%;
     height: 32px;
 }
+
+.formLabel{
+    margin: 10px 0px;
+}
+
+.publisherDiv{
+    margin-bottom: 10px;
+}

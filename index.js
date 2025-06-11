@@ -27,3 +27,26 @@ function getBookList() {
 }
 
 getBookList()
+
+const addModalDom = document.querySelector('.add-modal')
+const addModal = new bootstrap.Modal(addModalDom)
+document.querySelector('.saveBtn').addEventListener('click', () => {
+    const addForm = document.querySelector('.addBookForm')
+    const bookObj = serialize(addForm, {hash: true, empty: true})
+    console.log(bookObj)
+
+    axios({
+        url: 'https://hmajax.itheima.net/api/books',
+        method: 'post',
+        data: {
+            ...bookObj,
+            creator
+        }
+    }).then(result => {
+        console.log(result)
+        getBookList()
+        addForm.reset()
+        addModal.hide()
+    })
+
+})
